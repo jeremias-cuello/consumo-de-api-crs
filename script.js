@@ -1,5 +1,8 @@
-function loadUser(user){
-    const tr = document.createElement('tr');
+/**
+ * @param {object} user
+ */
+function loadUser(user) {
+    const tr = document.createElement("tr");
     tr.innerHTML = `
         <td>${user.name}</td>
         <td>${user.username}</td>
@@ -15,25 +18,26 @@ function loadUser(user){
         <td>${user.company.catchPhrase}</td>
         <td>${user.company.bs}</td>
     `;
-    document.querySelector('tbody').appendChild(tr);
+
+    document.querySelector("tbody").appendChild(tr);
 }
 
 /**
- * @param {[user]} users
+ * @param {user[]} users
  */
 function loadUsers(users) {
     users.forEach(loadUser);
 }
 
-function eliminarLuego(e, cb){
+function eliminarLuego(e, cb) {
     cb();
     e.parentElement.removeChild(e);
 }
 
-document.querySelector('#load').addEventListener('click', e => {
+document.querySelector("#load").addEventListener("click", (e) => {
     eliminarLuego(e.target, () => {
-        fetch('https://jsonplaceholder.typicode.com/users/')
-        .then(res => res.json())
-        .then(loadUsers)
-    })
+        fetch("https://jsonplaceholder.typicode.com/users/")
+            .then((res) => res.json())
+            .then(loadUsers);
+    });
 });
